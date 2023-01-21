@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    Uname:<input type="text" name="uname" id="uname" /> <br>
+    Password:<input type="text" name="password" id="password"/>
+    <button onClick="init()">Press</button>
+
+    <script>
+      function init() {
+        const data = {
+          uname: document.getElementById("uname").value.toString(),
+          password: document.getElementById("password").value.toString(),
+        };
+
+        fetch("http://localhost:8000/userinsert", {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success:", data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
